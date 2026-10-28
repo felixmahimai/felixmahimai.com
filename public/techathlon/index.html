@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Techathlon Partner Proposal</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout concept: a pre-dawn Chennai morning. Text first, then a wide animated street scene (sunrise, tech-park skyline with a circuit line on the horizon, riders and runners passing). The rest reads as calm stations below. */
+:root {
+  --bg: #EBEFF2;
+  --surface: #F7F9FA;
+  --ink: #0D1B27;
+  --muted: #46586A;
+  --line: #C6D0D8;
+  --accent: #077A70;
+  --hi: #E0A400;
+  --hi-soft: rgba(224, 164, 0, 0.16);
+  --sky-a: #BFD2E0;
+  --sky-b: #F6E4C2;
+  --sun: #F2A900;
+  --bld: #8FA3B3;
+  --bld2: #5E7589;
+  --road: #AEBBC6;
+  --lane: #F7F9FA;
+  --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #08121B; --surface: #0F1D29; --ink: #E8EEF2; --muted: #93A5B3;
+    --line: #223747; --accent: #2DD4BF; --hi: #FFC933; --hi-soft: rgba(255, 201, 51, 0.14);
+    --sky-a: #091624; --sky-b: #3A4A66; --sun: #FFB800; --bld: #1A2D40; --bld2: #0F1D2C;
+    --road: #0B141D; --lane: #35506A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #08121B; --surface: #0F1D29; --ink: #E8EEF2; --muted: #93A5B3;
+  --line: #223747; --accent: #2DD4BF; --hi: #FFC933; --hi-soft: rgba(255, 201, 51, 0.14);
+  --sky-a: #091624; --sky-b: #3A4A66; --sun: #FFB800; --bld: #1A2D40; --bld2: #0F1D2C;
+  --road: #0B141D; --lane: #35506A;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.wrap {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.mono { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+/* scroll progress */
+.prog { position: fixed; left: 0; right: 0; top: env(safe-area-inset-top, 0px); height: 3px; background: var(--line); z-index: 20; pointer-events: none; }
+.prog b { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(var(--p, 0)); }
+.prog i { position: absolute; top: -4px; width: 11px; height: 11px; border-radius: 50%; background: var(--hi); left: calc(var(--p, 0) * (100% - 11px)); box-shadow: 0 0 0 4px var(--hi-soft); }
+
+/* hero */
+.hero { padding-block: 3.2rem 0; }
+.brand { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 0 0 2.2rem; }
+.logo { display: inline-flex; align-items: center; text-decoration: none; color: var(--ink); }
+.logo img { height: 44px; width: auto; max-width: 100%; display: block; }
+.wordmark { font-family: var(--display); font-weight: 800; font-size: 1.35rem; letter-spacing: 0.04em; }
+.brand .url { color: var(--accent); text-decoration: none; text-transform: none; letter-spacing: 0.04em; font-size: 0.9rem; }
+.brand .url:hover { text-decoration: underline; }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; margin: 0 0 1.4rem; }
+.eyebrow span + span::before { content: "/"; margin-right: 1rem; color: var(--line); }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.5rem, 6.6vw, 4.9rem); line-height: 1.01; letter-spacing: -0.025em; margin: 0 0 1.4rem; text-wrap: balance; }
+h1 .l { display: block; animation: rise 0.9s cubic-bezier(.2,.7,.2,1) both; }
+h1 .l:nth-child(2) { animation-delay: 0.12s; }
+h1 .l:nth-child(3) { animation-delay: 0.24s; color: var(--accent); }
+@keyframes rise { from { transform: translateY(26px); opacity: 0.4; } to { transform: none; opacity: 1; } }
+.lead { max-width: 36rem; font-size: 1.14rem; color: var(--muted); margin: 0 0 1.6rem; animation: rise 0.9s 0.36s cubic-bezier(.2,.7,.2,1) both; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.6rem; animation: rise 0.9s 0.48s cubic-bezier(.2,.7,.2,1) both; }
+.chip { border: 1px solid var(--line); background: var(--surface); padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.9rem; }
+.chip.hi { border-color: var(--hi); background: var(--hi-soft); }
+
+/* street scene */
+.scene { margin-top: 2.6rem; }
+.scene svg { display: block; width: 100%; height: clamp(230px, 31vw, 350px); }
+.sky { fill: url(#skyGrad); }
+.sun .core { fill: var(--sun); }
+.sun .halo { fill: var(--sun); opacity: 0.2; transform-box: fill-box; transform-origin: center; animation: halo 4.5s ease-in-out infinite; }
+.sun { animation: sunrise 7s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes sunrise { from { transform: translateY(80px); } to { transform: none; } }
+@keyframes halo { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+.far rect { fill: var(--bld); }
+.near rect { fill: var(--bld2); }
+.win { fill: var(--hi); animation: tw 3.4s ease-in-out infinite; }
+.win.b { animation-duration: 4.6s; }
+.win.c { animation-duration: 5.9s; }
+@keyframes tw { 0%, 100% { opacity: 0.95; } 45% { opacity: 0.15; } 60% { opacity: 0.8; } }
+.horizon { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-dasharray: 4 8; opacity: 0.85; animation: flow 1.4s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -24; } }
+.pad { fill: var(--bg); stroke: var(--accent); stroke-width: 1.8; }
+.road { fill: var(--road); }
+.lanes { stroke: var(--lane); stroke-width: 3; stroke-dasharray: 34 26; animation: lane 0.9s linear infinite; }
+@keyframes lane { to { stroke-dashoffset: 60; } }
+.edge { stroke: var(--ink); stroke-width: 1; opacity: 0.25; }
+.mv { animation: cross var(--dur, 12s) linear infinite; animation-delay: var(--delay, 0s); }
+@keyframes cross { from { transform: translateX(-190px); } to { transform: translateX(1060px); } }
+.spin { transform-box: fill-box; transform-origin: center; animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.c-ink { color: var(--ink); }
+.c-ac { color: var(--accent); }
+.c-hi { color: var(--hi); }
+
+/* sections */
+.sec { padding-block: 4.5rem; border-top: 1px solid var(--line); }
+.hero + main .sec:first-child { margin-top: 3.2rem; }
+h2 { font-family: var(--display); font-weight: 800; font-size: clamp(1.8rem, 3.8vw, 2.7rem); line-height: 1.08; letter-spacing: -0.02em; margin: 0.6rem 0 1.4rem; text-wrap: balance; max-width: 22ch; }
+h3 { font-family: var(--display); font-weight: 800; font-size: 1.35rem; margin: 0 0 1rem; letter-spacing: -0.01em; }
+
+.rv { transform: translateY(20px); transition: transform 0.8s cubic-bezier(.2,.7,.2,1); }
+.rv.in { transform: none; }
+
+.event-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 3rem; align-items: start; }
+.event-grid p { margin: 0 0 1.1rem; max-width: 36rem; }
+.facts { margin: 0; display: grid; gap: 0; }
+.facts div { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 1rem; padding-block: 1rem; border-top: 1px solid var(--line); }
+.facts div:last-child { border-bottom: 1px solid var(--line); }
+.facts dt { padding-top: 0.2rem; }
+.facts dd { margin: 0; font-weight: 500; }
+.why { font-family: var(--display); font-weight: 500; font-size: clamp(1.4rem, 3vw, 2.1rem); line-height: 1.25; letter-spacing: -0.01em; margin: 3rem 0 0; max-width: 40ch; text-wrap: balance; }
+.why mark { color: inherit; background: linear-gradient(var(--hi-soft), var(--hi-soft)) no-repeat left 88% / 0% 0.55em; transition: background-size 1.2s 0.3s ease; }
+.why.in mark { background-size: 100% 0.55em; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); gap: 1.1rem; margin-top: 2rem; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.7rem; min-width: 0; transition: transform 0.25s, border-color 0.25s; }
+.card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.card .ico { width: 64px; height: 64px; }
+.card p { margin: 0; color: var(--muted); font-size: 0.97rem; flex: 1; }
+.card p.mono { font-size: 0.78rem; flex: none; margin-top: 0.3rem; }
+.tag { align-self: flex-start; border: 1px solid var(--hi); background: var(--hi-soft); border-radius: 3px; padding: 0.15rem 0.55rem; }
+
+.ico circle, .ico path, .ico rect { vector-effect: non-scaling-stroke; }
+.ico .s { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.ico .f { fill: var(--accent); }
+.ico .h { fill: var(--hi); }
+.ico .pace { animation: pace 2.6s ease-in-out infinite; }
+.ico .pace:nth-of-type(2) { animation-delay: 0.25s; }
+.ico .pace:nth-of-type(3) { animation-delay: 0.5s; }
+@keyframes pace { 0%, 100% { transform: translateX(-8px); } 50% { transform: translateX(10px); } }
+.ico .ring { fill: none; stroke: var(--accent); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: ping 2.4s ease-out infinite; }
+.ico .ring.d2 { animation-delay: 1.2s; }
+@keyframes ping { from { transform: scale(0.4); opacity: 0.9; } to { transform: scale(2.4); opacity: 0; } }
+.ico .vol { animation: vol 3s ease-in-out infinite; }
+.ico .vol:nth-of-type(2) { animation-delay: 0.3s; }
+.ico .vol:nth-of-type(3) { animation-delay: 0.6s; }
+.ico .vol:nth-of-type(4) { animation-delay: 0.9s; }
+.ico .vol:nth-of-type(5) { animation-delay: 1.2s; }
+.ico .vol:nth-of-type(6) { animation-delay: 1.5s; }
+@keyframes vol { 0%, 60%, 100% { opacity: 0.25; } 30% { opacity: 1; } }
+.ico .arc { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; animation: arc 2s ease-in-out infinite; }
+.ico .arc.a2 { animation-delay: 0.25s; }
+.ico .arc.a3 { animation-delay: 0.5s; }
+@keyframes arc { 0%, 100% { opacity: 0.2; } 40% { opacity: 1; } }
+
+.gets { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 2.5rem 3rem; margin-top: 2.2rem; }
+.col h3 { padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+.col ul { list-style: none; margin: 0; padding: 0; }
+.col li { padding: 0.95rem 0.5rem 0.95rem 0; border-bottom: 1px solid var(--line); position: relative; transition: padding-left 0.25s; }
+.col li:hover { padding-left: 0.7rem; }
+.col li::before { content: ""; position: absolute; left: 0; top: 1.5rem; width: 0; height: 2px; background: var(--accent); transition: width 0.25s; }
+.col li:hover::before { width: 0.45rem; }
+.col strong { display: block; font-weight: 600; }
+.col span { color: var(--muted); font-size: 0.97rem; }
+.col .tag { display: inline-block; margin-left: 0.4rem; vertical-align: 1px; }
+
+.next { background: var(--ink); color: var(--bg); padding-block: 4.5rem 0; overflow: hidden; }
+.next h2 { color: var(--bg); }
+.next .mono { color: var(--bg); opacity: 0.7; }
+.next p { max-width: 36rem; font-size: 1.15rem; margin: 0 0 3rem; }
+.next p.mono { font-size: 0.78rem; margin: 0; }
+.finish { height: 36px; background: repeating-conic-gradient(var(--bg) 0 25%, var(--ink) 0 50%) 0 0 / 36px 36px; animation: slide 6s linear infinite; }
+@keyframes slide { to { background-position: -72px 0; } }
+
+footer { padding-block: 1.6rem; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; }
+
+@media (max-width: 860px) {
+  .event-grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .hero { padding-block: 2.4rem 0; }
+  .sec { padding-block: 3.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .rv { transform: none; }
+  .why mark { background-size: 100% 0.55em; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="prog" aria-hidden="true"><b></b><i></i></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <a class="logo" href="https://techathlon.fit" target="_blank" rel="noopener" aria-label="Techathlon">
+        <img id="logo" src="logo.png" alt="Techathlon" hidden>
+        <span id="wordmark" class="wordmark">TECHATHLON</span>
+      </a>
+      <a class="url mono" href="https://techathlon.fit" target="_blank" rel="noopener">techathlon.fit</a>
+    </div>
+    <p class="eyebrow mono"><span>Community Partner proposal</span><span>Chennai</span><span>March 2027, date to be finalised</span></p>
+    <h1><span class="l">Partner with us</span><span class="l">on Techathlon</span><span class="l">Chennai.</span></h1>
+    <p class="lead">Techathlon Chennai would like Chennai Cyclists as its Community Partner. This page sets out what we need from you and what you get in return, so both sides know where they stand.</p>
+    <div class="chips">
+      <span class="chip hi">March 2027, date to be finalised</span>
+      <span class="chip">Ride and run for the tech community</span>
+      <a class="chip" href="https://techathlon.fit" target="_blank" rel="noopener">techathlon.fit</a>
+    </div>
+  </div>
+
+  <div class="wrap scene">
+    <svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A Chennai morning street scene: the sun rises behind a tech park skyline while cyclists and runners pass along the road">
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style="stop-color: var(--sky-a)"/>
+          <stop offset="1" style="stop-color: var(--sky-b)"/>
+        </linearGradient>
+        <clipPath id="sceneClip"><rect width="1000" height="300"/></clipPath>
+      </defs>
+      <g clip-path="url(#sceneClip)">
+        <rect class="sky" width="1000" height="300"/>
+
+        <g class="sun">
+          <circle class="halo" cx="720" cy="168" r="96"/>
+          <circle class="core" cx="720" cy="168" r="46"/>
+        </g>
+
+        <g class="far">
+          <rect x="0" y="170" width="60" height="62"/><rect x="60" y="150" width="50" height="82"/><rect x="110" y="185" width="70" height="47"/>
+          <rect x="180" y="140" width="44" height="92"/><rect x="224" y="175" width="66" height="57"/><rect x="290" y="120" width="40" height="112"/>
+          <rect x="330" y="165" width="58" height="67"/><rect x="388" y="150" width="48" height="82"/><rect x="436" y="190" width="72" height="42"/>
+          <rect x="508" y="130" width="46" height="102"/><rect x="554" y="170" width="60" height="62"/><rect x="614" y="145" width="52" height="87"/>
+          <rect x="666" y="180" width="64" height="52"/><rect x="730" y="125" width="44" height="107"/><rect x="774" y="165" width="60" height="67"/>
+          <rect x="834" y="150" width="50" height="82"/><rect x="884" y="185" width="60" height="47"/><rect x="944" y="140" width="56" height="92"/>
+        </g>
+
+        <g>
+          <rect class="win" x="70" y="165" width="5" height="7"/><rect class="win b" x="80" y="180" width="5" height="7" style="animation-delay:-1.2s"/>
+          <rect class="win c" x="190" y="155" width="5" height="7" style="animation-delay:-2.4s"/><rect class="win" x="198" y="172" width="5" height="7" style="animation-delay:-0.6s"/>
+          <rect class="win b" x="300" y="135" width="5" height="7" style="animation-delay:-3s"/><rect class="win c" x="311" y="152" width="5" height="7" style="animation-delay:-1.8s"/>
+          <rect class="win" x="300" y="170" width="5" height="7" style="animation-delay:-4s"/><rect class="win b" x="400" y="168" width="5" height="7" style="animation-delay:-2.2s"/>
+          <rect class="win c" x="518" y="145" width="5" height="7" style="animation-delay:-0.9s"/><rect class="win" x="528" y="162" width="5" height="7" style="animation-delay:-3.5s"/>
+          <rect class="win b" x="740" y="140" width="5" height="7" style="animation-delay:-1.5s"/><rect class="win c" x="752" y="158" width="5" height="7" style="animation-delay:-2.9s"/>
+          <rect class="win" x="955" y="156" width="5" height="7" style="animation-delay:-0.3s"/><rect class="win b" x="966" y="174" width="5" height="7" style="animation-delay:-4.4s"/>
+          <rect class="win c" x="124" y="200" width="5" height="7" style="animation-delay:-2s"/>
+        </g>
+
+        <g class="near">
+          <rect x="30" y="195" width="90" height="45"/><rect x="150" y="205" width="70" height="35"/><rect x="250" y="190" width="80" height="50"/>
+          <rect x="400" y="200" width="100" height="40"/><rect x="560" y="192" width="90" height="48"/><rect x="700" y="205" width="80" height="35"/>
+          <rect x="820" y="195" width="110" height="45"/>
+        </g>
+
+        <path class="horizon" d="M0 244 H120 L140 232 H300 L320 244 H560 L580 232 H760 L780 244 H1000"/>
+        <circle class="pad" cx="140" cy="232" r="5"/><circle class="pad" cx="320" cy="244" r="5"/>
+        <circle class="pad" cx="580" cy="232" r="5"/><circle class="pad" cx="780" cy="244" r="5"/>
+
+        <rect class="road" x="0" y="247" width="1000" height="53"/>
+        <line class="edge" x1="0" y1="247" x2="1000" y2="247"/>
+        <line class="lanes" x1="0" y1="274" x2="1000" y2="274"/>
+
+        <g id="movers"></g>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<main>
+  <section class="sec" id="event">
+    <div class="wrap">
+      <p class="mono">The event</p>
+      <h2>A ride and run for Chennai's tech community.</h2>
+      <div class="event-grid">
+        <div class="rv">
+          <p>Techathlon brings Chennai's tech community together for a ride and a run, followed by short AI talks and breakfast.</p>
+          <p>Techathlon is organised by our team. As Community Partner, Chennai Cyclists supports us on the ground and with its riders.</p>
+          <p>Details are at <a href="https://techathlon.fit" target="_blank" rel="noopener">techathlon.fit</a>.</p>
+        </div>
+        <dl class="facts rv">
+          <div><dt class="mono">Date</dt><dd>March 2027, to be finalised</dd></div>
+          <div><dt class="mono">Format</dt><dd>Ride and run, short AI talks, breakfast</dd></div>
+          <div><dt class="mono">City</dt><dd>Chennai, Edition 01</dd></div>
+        </dl>
+      </div>
+      <p class="why rv">We want Chennai Cyclists as Community Partner because a ride is safer and better with riders who know the road, and <mark>no one in Chennai knows the roads, the riders or the culture better than your club.</mark></p>
+    </div>
+  </section>
+
+  <section class="sec" id="need">
+    <div class="wrap">
+      <p class="mono">What we need from Chennai Cyclists</p>
+      <h2>Four ways the club can help.</h2>
+      <div class="cards">
+        <article class="card rv">
+          <svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
+            <path class="s" d="M6 48 H58" opacity="0.4"/>
+            <circle class="pace h" cx="22" cy="20" r="5"/>
+            <circle class="pace f" cx="22" cy="34" r="5"/>
+            <circle class="pace f" cx="22" cy="48" r="5" opacity="0.6"/>
+          </svg>
+          <p class="mono">Ride leadership</p>
+          <p>Ride leaders for each pace group and sweep riders at the back.</p>
+          <span class="tag mono">To agree</span>
+        </article>
+        <article class="card rv">
+          <svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="ring" cx="32" cy="32" r="12"/>
+            <circle class="ring d2" cx="32" cy="32" r="12"/>
+            <path class="s" d="M32 14 V50 M20 26 H44"/>
+            <circle class="h" cx="32" cy="32" r="5"/>
+          </svg>
+          <p class="mono">Route safety</p>
+          <p>Marshals at turns and junctions.</p>
+          <span class="tag mono">To agree</span>
+        </article>
+        <article class="card rv">
+          <svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="vol f" cx="14" cy="20" r="5"/>
+            <circle class="vol f" cx="32" cy="20" r="5"/>
+            <circle class="vol f" cx="50" cy="20" r="5"/>
+            <circle class="vol h" cx="14" cy="44" r="5"/>
+            <circle class="vol h" cx="32" cy="44" r="5"/>
+            <circle class="vol h" cx="50" cy="44" r="5"/>
+          </svg>
+          <p class="mono">Event day volunteers</p>
+          <p>Registration desk, hydration points, start and finish, medal distribution, breakfast.</p>
+          <span class="tag mono">To agree</span>
+        </article>
+        <article class="card rv">
+          <svg class="ico" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="h" cx="16" cy="32" r="5"/>
+            <path class="arc a1" d="M26 22 A14 14 0 0 1 26 42"/>
+            <path class="arc a2" d="M35 15 A24 24 0 0 1 35 49"/>
+            <path class="arc a3" d="M44 8 A34 34 0 0 1 44 56"/>
+          </svg>
+          <p class="mono">Promotion</p>
+          <p>Share the event with members on WhatsApp, Instagram and Strava, using a shared member code.</p>
+          <span class="tag mono">Before and after launch</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="gets">
+    <div class="wrap">
+      <p class="mono">What Chennai Cyclists gets</p>
+      <h2>In return, the club is front and centre.</h2>
+      <div class="gets">
+        <div class="col rv">
+          <h3>Visibility</h3>
+          <ul>
+            <li><strong>Co-branding</strong><span>Your logo as Community Partner on techathlon.fit, on the event t-shirt, on banners and the start arch, and on the medal ribbon where practical.</span></li>
+            <li><strong>Credit</strong><span>A named mention in all event posts and announcements.</span></li>
+            <li><strong>Stage time</strong><span>A short welcome slot at flag-off or the tech session to tell the room about the club.</span></li>
+            <li><strong>National and international exposure</strong><span>Visibility for the club through the BYCS and Fit India networks.</span></li>
+          </ul>
+        </div>
+        <div class="col rv">
+          <h3>For your riders</h3>
+          <ul>
+            <li><strong>Volunteer perks</strong><span>A t-shirt, medal and breakfast for every volunteer, plus an e-certificate.</span></li>
+            <li><strong>Free entries</strong><span>A set number of complimentary entries for core members. <span class="tag mono">Number to agree</span></span></li>
+            <li><strong>Member benefit</strong><span>A discount code and early registration access for your riders.</span></li>
+            <li><strong>Content</strong><span>Photos and video from the day, shared for your own use.</span></li>
+          </ul>
+        </div>
+        <div class="col rv">
+          <h3>Growth</h3>
+          <ul>
+            <li><strong>Membership growth</strong><span>A direct route for corporate riders to join Chennai Cyclists after the event, with their consent.</span></li>
+            <li><strong>Corporate access</strong><span>Introductions to tech companies and potential sponsors.</span></li>
+            <li><strong>Future role</strong><span>First right to continue as Community Partner in later Chennai editions, and a say in route and ride format.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="next" id="next">
+  <div class="wrap">
+    <p class="mono">Next step</p>
+    <h2>Tell us what you think.</h2>
+    <p>Please reply in the group to confirm or suggest changes, and we will settle the numbers marked "To agree".</p>
+  </div>
+  <div class="finish" aria-hidden="true"></div>
+</section>
+
+<footer>
+  <div class="wrap mono">
+    <span>Techathlon Chennai</span>
+    <span>28 October 2026</span>
+    <a href="https://techathlon.fit" target="_blank" rel="noopener">techathlon.fit</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- street scene: cyclists and runners ---- */
+  var LEG_X = "4;1.4;-5;-11.4;-14;-11.4;-5;1.4;4";
+  var LEG_Y = "-16;-9.6;-7;-9.6;-16;-22.4;-25;-22.4;-16";
+
+  function cyclist(col) {
+    return '<g class="c-' + col + '" fill="none" style="stroke:var(--ink)" stroke-linecap="round" stroke-linejoin="round">' +
+      '<circle cx="-24" cy="-16" r="15" stroke-width="2.4"/><circle cx="24" cy="-16" r="15" stroke-width="2.4"/>' +
+      '<g class="spin"><path d="M-24 -30V-2M-38 -16H-10M-34 -26L-14 -6M-14 -26L-34 -6" stroke-width="1" opacity="0.6"/></g>' +
+      '<g class="spin"><path d="M24 -30V-2M10 -16H38M14 -26L34 -6M34 -26L14 -6" stroke-width="1" opacity="0.6"/></g>' +
+      '<path d="M-24 -16L-5 -16L-11 -38L-24 -16M-5 -16L15 -38M-11 -38H15M15 -38L24 -16M15 -38L19 -43" stroke-width="2.6"/>' +
+      '<path d="M-16 -41H-6" stroke-width="3"/>' +
+      '<line x1="-11" y1="-43" x2="4" y2="-16" stroke-width="4">' +
+        '<animate attributeName="x2" values="' + LEG_X + '" dur="0.8s" repeatCount="indefinite"/>' +
+        '<animate attributeName="y2" values="' + LEG_Y + '" dur="0.8s" repeatCount="indefinite"/></line>' +
+      '<line x1="-11" y1="-43" x2="-14" y2="-16" stroke-width="4">' +
+        '<animate attributeName="x2" values="' + LEG_X + '" dur="0.8s" begin="-0.4s" repeatCount="indefinite"/>' +
+        '<animate attributeName="y2" values="' + LEG_Y + '" dur="0.8s" begin="-0.4s" repeatCount="indefinite"/></line>' +
+      '<path d="M-11 -44L6 -59" stroke="currentColor" stroke-width="7"/>' +
+      '<path d="M6 -59L19 -43" stroke-width="2.6"/>' +
+      '<circle cx="11" cy="-67" r="5.5" fill="currentColor" stroke="none"/></g>';
+  }
+
+  function runner(col) {
+    function swing(x, y, dur, begin) {
+      return '<animateTransform attributeName="transform" type="rotate" values="-40 ' + x + ' ' + y + ';40 ' + x + ' ' + y + ';-40 ' + x + ' ' + y + '" dur="' + dur + '" ' + (begin ? 'begin="' + begin + '" ' : '') + 'repeatCount="indefinite"/>';
+    }
+    return '<g class="c-' + col + '" fill="none" style="stroke:var(--ink)" stroke-linecap="round">' +
+      '<animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="0.35s" repeatCount="indefinite"/>' +
+      '<line x1="-2" y1="-34" x2="-2" y2="-6" stroke-width="4">' + swing(-2, -34, "0.7s") + '</line>' +
+      '<line x1="-2" y1="-34" x2="-2" y2="-6" stroke-width="4">' + swing(-2, -34, "0.7s", "-0.35s") + '</line>' +
+      '<line x1="3" y1="-53" x2="3" y2="-36" stroke-width="3">' + swing(3, -53, "0.7s", "-0.35s") + '</line>' +
+      '<path d="M3 -56L-2 -34" stroke="currentColor" stroke-width="8"/>' +
+      '<line x1="3" y1="-53" x2="3" y2="-36" stroke-width="3">' + swing(3, -53, "0.7s") + '</line>' +
+      '<circle cx="5" cy="-64" r="5.5" fill="currentColor" stroke="none"/></g>';
+  }
+
+  /* y = ground line, s = scale, rest = x when motion is reduced */
+  var movers = [
+    { y: 266, s: 0.8,  dur: 26, delay: -18, rest: 140, items: [["r", "ink", 0], ["r", "ac", -38], ["r", "hi", -74]] },
+    { y: 272, s: 0.7,  dur: 17, delay: -6,  rest: 430, items: [["c", "ac", 0], ["c", "hi", -62]] },
+    { y: 284, s: 0.95, dur: 31, delay: -22, rest: 700, items: [["r", "hi", 0], ["r", "ink", -42]] },
+    { y: 294, s: 1,    dur: 12, delay: -4,  rest: 300, items: [["c", "hi", 0], ["c", "ac", -66], ["c", "ink", -132]] },
+    { y: 294, s: 1,    dur: 12, delay: -10, rest: 860, items: [["c", "ink", 0], ["c", "hi", -66]] }
+  ];
+  var host = document.getElementById("movers");
+  if (host) {
+    movers.sort(function (a, b) { return a.y - b.y; });
+    var html = "";
+    movers.forEach(function (m) {
+      var inner = "";
+      m.items.forEach(function (it) {
+        inner += '<g transform="translate(' + it[2] + ' 0)">' + (it[0] === "c" ? cyclist(it[1]) : runner(it[1])) + "</g>";
+      });
+      var style = reduce ? "transform:translateX(" + m.rest + "px)" : "--dur:" + m.dur + "s;--delay:" + m.delay + "s";
+      html += '<g class="' + (reduce ? "" : "mv") + '" style="' + style + '"><g transform="translate(0 ' + m.y + ') scale(' + m.s + ')">' + inner + "</g></g>";
+    });
+    host.innerHTML = html;
+  }
+
+  if (reduce) {
+    document.querySelectorAll("svg").forEach(function (s) { if (s.pauseAnimations) s.pauseAnimations(); });
+  }
+
+  /* ---- logo, progress, reveal ---- */
+  var logo = document.getElementById("logo"), mark = document.getElementById("wordmark");
+  if (logo) {
+    logo.addEventListener("load", function () { logo.hidden = false; if (mark) mark.hidden = true; });
+    if (logo.complete && logo.naturalWidth > 0) { logo.hidden = false; if (mark) mark.hidden = true; }
+  }
+  var prog = document.querySelector(".prog");
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+    prog.style.setProperty("--p", p.toFixed(4));
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  var els = document.querySelectorAll(".rv");
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function (el) { io.observe(el); });
+  } else {
+    els.forEach(function (el) { el.classList.add("in"); });
+  }
+})();
+</script>
+
+</body>
+</html>
